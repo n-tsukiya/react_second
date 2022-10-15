@@ -23,14 +23,24 @@
 
 // export default App;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorfulMessage from "./components/ColorfulMessage";
 
 const App = () => {
-  const onClickCountUp = () => {
-    setNum(num + 1);
-  };
   const [num, setNum] = useState(0);
+  const [faceShowFlag, setfaceShowFlag] = useState(false);
+
+  const onClickCountUp = () => setNum(num + 1);
+  const onClickSwitchShowFlag = () => setfaceShowFlag(!faceShowFlag);
+
+  useEffect(() => {
+    console.log("useEffect!!!");
+    if (num % 3 === 0 && num > 0) {
+      faceShowFlag || setfaceShowFlag(true);
+    } else {
+      faceShowFlag && setfaceShowFlag(false);
+    }
+  }, [num]);
 
   return (
     <>
@@ -38,7 +48,10 @@ const App = () => {
       <ColorfulMessage color="blue">お元気ですか？？？？</ColorfulMessage>
       <ColorfulMessage color="pink">元気です！</ColorfulMessage>
       <button onClick={onClickCountUp}>カウントアップ</button>
+      <br />
+      <button onClick={onClickSwitchShowFlag}>on/off</button>
       <p>{num}</p>
+      {faceShowFlag && <p>🥳</p>}
     </>
   );
 };
