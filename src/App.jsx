@@ -24,7 +24,7 @@
 // export default App;
 
 import React, { useEffect, useState } from "react";
-import ColorfulMessage from "./components/ColorfulMessage";
+import { ColorfulMessage } from "./components/ColorfulMessage";
 
 const App = () => {
   const [num, setNum] = useState(0);
